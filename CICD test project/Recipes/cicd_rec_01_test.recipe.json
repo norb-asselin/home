@@ -1,0 +1,227 @@
+{
+  "name": "CICD | REC-01 | Test",
+  "description": "",
+  "version": 8,
+  "private": true,
+  "concurrency": 1,
+  "version_comment": "Package_id: 124486 | \nreq_id: ded14c6d-7e45-4217-9d65-dd17f65dbf65 |\nrel= |",
+  "code": {
+    "number": 0,
+    "provider": "clock",
+    "name": "scheduled_event",
+    "as": "858bf386",
+    "keyword": "trigger",
+    "input": {
+      "time_unit": "minutes",
+      "trigger_every": "5"
+    },
+    "extended_input_schema": [
+      {
+        "control_type": "integer",
+        "default": "5",
+        "enforce_template_mode": true,
+        "extends_schema": true,
+        "hint": "Define repeating schedule. Enter whole numbers only.This field can be set to a minimum of 5 minutes.",
+        "label": "Trigger every",
+        "name": "trigger_every",
+        "optional": false,
+        "suffix": {
+          "text": "minutes"
+        },
+        "type": "string"
+      },
+      {
+        "control_type": "select",
+        "hint": "Select the timezone to use. Leave it blank to use <b>{{authUser.account_timezone}}</b>",
+        "label": "Timezone",
+        "name": "timezone",
+        "optional": true,
+        "pick_list": "timezone_id_global_pick_list",
+        "pick_list_connection_less": true,
+        "type": "string"
+      },
+      {
+        "control_type": "date_time",
+        "enforce_template_mode": true,
+        "extends_schema": true,
+        "hint": "Set date and time to start or leave blank to start immediately. <b>Once recipe has been run or tested, value cannot be changed.</b>",
+        "label": "Start after",
+        "name": "start_after",
+        "optional": true,
+        "parse_output": "date_time_conversion",
+        "since_field": true,
+        "type": "date_time",
+        "ignore_timezone": true,
+        "render_input": "date_time_conversion"
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "provider": "workato_recipe_function",
+        "name": "call_recipe",
+        "as": "45f571c8",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+          "flow_id": "FUN | 001"
+        },
+        "input": {
+          "flow_id": {
+            "zip_name": "Common/Functions/fun_001.recipe.json",
+            "name": "FUN | 001",
+            "folder": "Common/Functions"
+          }
+        },
+        "extended_output_schema": [
+          {
+            "label": "Result",
+            "name": "result",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Output",
+                "name": "output",
+                "type": "string",
+                "optional": true
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "label": "Parameters",
+            "name": "parameters",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Input",
+                "name": "input",
+                "type": "string",
+                "optional": true
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "uuid": "8a2d3ebd-c407-4a9e-b369-f4dec42dd691"
+      },
+      {
+        "number": 2,
+        "provider": "logger",
+        "name": "log_message",
+        "as": "8bae9227",
+        "keyword": "action",
+        "input": {
+          "user_logs_enabled": "false",
+          "message": "This is a test"
+        },
+        "extended_input_schema": [
+          {
+            "control_type": "switch",
+            "default": false,
+            "disable_formula": true,
+            "extends_schema": true,
+            "hint": "Send a copy of the message to Workato logs.\n<a href=\"https://docs.workato.com/features/logging-service.html\" target=\"_blank\" class=\"ng-scope\">\n  Learn more\n</a>\n",
+            "label": "Send to Workato log service",
+            "name": "user_logs_enabled",
+            "optional": true,
+            "type": "string"
+          }
+        ],
+        "comment": "Comment 2",
+        "uuid": "c5d1ca83-4bd1-40dd-ac95-4cc9128a4eb3"
+      },
+      {
+        "number": 3,
+        "provider": "logger",
+        "name": "log_message",
+        "as": "3111c0d0",
+        "keyword": "action",
+        "input": {
+          "user_logs_enabled": "false",
+          "message": "This is an update"
+        },
+        "extended_input_schema": [
+          {
+            "control_type": "switch",
+            "default": false,
+            "disable_formula": true,
+            "extends_schema": true,
+            "hint": "Send a copy of the message to Workato logs.\n<a href=\"https://docs.workato.com/features/logging-service.html\" target=\"_blank\" class=\"ng-scope\">\n  Learn more\n</a>\n",
+            "label": "Send to Workato log service",
+            "name": "user_logs_enabled",
+            "optional": true,
+            "type": "string"
+          }
+        ],
+        "comment": "Comment 3",
+        "uuid": "4f42f6b3-a94a-4156-aa3d-75829cb4c689"
+      },
+      {
+        "number": 4,
+        "provider": "logger",
+        "name": "log_message",
+        "as": "22c849b3",
+        "keyword": "action",
+        "input": {
+          "user_logs_enabled": "false",
+          "message": "another message"
+        },
+        "extended_input_schema": [
+          {
+            "control_type": "switch",
+            "default": false,
+            "disable_formula": true,
+            "extends_schema": true,
+            "hint": "Send a copy of the message to Workato logs.\n<a href=\"https://docs.workato.com/features/logging-service.html\" target=\"_blank\" class=\"ng-scope\">\n  Learn more\n</a>\n",
+            "label": "Send to Workato log service",
+            "name": "user_logs_enabled",
+            "optional": true,
+            "type": "string"
+          }
+        ],
+        "comment": "Comment 4",
+        "uuid": "28118340-77de-4566-a500-1005ea71d04b"
+      },
+      {
+        "number": 5,
+        "provider": "google_drive",
+        "name": "search_file_or_folder",
+        "as": "411c4cba",
+        "keyword": "action",
+        "input": {
+        },
+        "uuid": "951916b2-9bb0-42ab-abab-0500577a54da"
+      }
+    ],
+    "comment": "comment 1",
+    "uuid": "77970cfd-dbe7-4752-845d-c3ed9875089a"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "clock",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "logger",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "google_drive",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}

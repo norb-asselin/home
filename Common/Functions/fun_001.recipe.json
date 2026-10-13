@@ -1,0 +1,93 @@
+{
+  "name": "FUN | 001",
+  "description": "",
+  "version": 2,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "workato_recipe_function",
+    "name": "execute",
+    "as": "886f5744",
+    "keyword": "trigger",
+    "input": {
+      "parameters_schema_json": "[{\"name\":\"input\",\"type\":\"string\",\"optional\":true,\"control_type\":\"text\",\"label\":\"Input\"}]",
+      "result_schema_json": "[{\"name\":\"output\",\"type\":\"string\",\"optional\":true,\"control_type\":\"text\",\"label\":\"Output\"}]"
+    },
+    "extended_output_schema": [
+      {
+        "label": "Parameters",
+        "name": "parameters",
+        "properties": [
+          {
+            "control_type": "text",
+            "label": "Input",
+            "name": "input",
+            "type": "string",
+            "optional": true
+          }
+        ],
+        "type": "object"
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "provider": "workato_recipe_function",
+        "name": "return_result",
+        "as": "7d783c55",
+        "keyword": "action",
+        "input": {
+          "result": {
+            "output": "ok"
+          }
+        },
+        "extended_output_schema": [
+          {
+            "label": "Result",
+            "name": "result",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Output",
+                "name": "output",
+                "type": "string",
+                "optional": true
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "label": "Result",
+            "name": "result",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Output",
+                "name": "output",
+                "type": "string",
+                "optional": true
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "visible_config_fields": [
+          "result.output"
+        ],
+        "uuid": "b69ba704-2c6b-4a88-8e2e-72d8241a5224"
+      }
+    ],
+    "uuid": "390b1278-144b-43db-a699-e4810a168e31"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}
