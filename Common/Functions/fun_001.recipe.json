@@ -4,6 +4,7 @@
   "version": 2,
   "private": true,
   "concurrency": 1,
+  "version_comment": "Package_id: 2352868 | \nreq_id: 3c258f6a-3ecc-4e73-b75d-c9b5ac16d607 |\nrel= |",
   "code": {
     "number": 0,
     "provider": "workato_recipe_function",
