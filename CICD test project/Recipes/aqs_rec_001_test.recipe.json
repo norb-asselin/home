@@ -1,0 +1,287 @@
+{
+  "name": "AQS | REC-001 | test",
+  "description": "",
+  "version": 5,
+  "private": true,
+  "concurrency": 1,
+  "version_comment": "Package_id: 124486 | \nreq_id: ded14c6d-7e45-4217-9d65-dd17f65dbf65 |\nrel= |",
+  "code": {
+    "number": 0,
+    "provider": "clock",
+    "name": "scheduled_event",
+    "as": "d3fc1b0c",
+    "keyword": "trigger",
+    "input": {
+      "time_unit": "minutes",
+      "trigger_every": "5"
+    },
+    "extended_input_schema": [
+      {
+        "control_type": "integer",
+        "default": "5",
+        "enforce_template_mode": true,
+        "extends_schema": true,
+        "hint": "Define repeating schedule. Enter whole numbers only.This field can be set to a minimum of 5 minutes.",
+        "label": "Trigger every",
+        "name": "trigger_every",
+        "optional": false,
+        "suffix": {
+          "text": "minutes"
+        },
+        "type": "string"
+      },
+      {
+        "control_type": "select",
+        "hint": "Select the timezone to use. Leave it blank to use <b>{{authUser.account_timezone}}</b>",
+        "label": "Timezone",
+        "name": "timezone",
+        "optional": true,
+        "pick_list": "timezone_id_global_pick_list",
+        "pick_list_connection_less": true,
+        "type": "string"
+      },
+      {
+        "control_type": "date_time",
+        "enforce_template_mode": true,
+        "extends_schema": true,
+        "hint": "Set date and time to start or leave blank to start immediately. <b>Once recipe has been run or tested, value cannot be changed.</b>",
+        "label": "Start after",
+        "name": "start_after",
+        "optional": true,
+        "parse_output": "date_time_conversion",
+        "since_field": true,
+        "type": "date_time",
+        "ignore_timezone": true,
+        "render_input": "date_time_conversion"
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "provider": "workato_files",
+        "name": "search_files",
+        "as": "9a1eebd8",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+          "file_path": {
+            "ids": [
+              "/"
+            ],
+            "titles": [
+              "Root directory"
+            ]
+          }
+        },
+        "toggleCfg": {
+          "file_path": true
+        },
+        "input": {
+          "file_name_filter": {
+            "condition": "equals",
+            "value": "test"
+          },
+          "file_path": "/"
+        },
+        "uuid": "99883581-100d-44b6-8e63-9625fd87e3c1"
+      },
+      {
+        "number": 2,
+        "provider": "workato_files",
+        "name": "store_file",
+        "as": "3180c838",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+          "file_path": {
+            "ids": [
+              "/"
+            ],
+            "titles": [
+              "Root directory"
+            ]
+          }
+        },
+        "toggleCfg": {
+          "is_csv_file": true,
+          "overwrite": true,
+          "file_path": true
+        },
+        "input": {
+          "is_csv_file": "false",
+          "schema_type": "auto",
+          "csv_has_header": "true",
+          "csv_delimiter": "comma",
+          "csv_quote": "double",
+          "encoding": "UTF-8",
+          "overwrite": "false",
+          "content": "test",
+          "file_name": "test",
+          "file_path": "/"
+        },
+        "uuid": "d35ba837-c90d-403f-8dac-e971be5e3a99"
+      },
+      {
+        "number": 3,
+        "provider": "workato_files",
+        "name": "append_to_file",
+        "as": "7f998048",
+        "keyword": "action",
+        "toggleCfg": {
+          "is_csv_file": true,
+          "file_path": false
+        },
+        "input": {
+          "is_csv_file": "false",
+          "schema_type": "auto",
+          "csv_has_header": "false",
+          "csv_preserve_header": "false",
+          "csv_delimiter": "comma",
+          "csv_quote": "double",
+          "encoding": "UTF-8",
+          "file_path": "/test",
+          "content": "test"
+        },
+        "uuid": "b7f712b9-4db9-4941-8455-bb994f95211b"
+      },
+      {
+        "number": 4,
+        "provider": "workato_variable",
+        "name": "declare_variable",
+        "as": "a0e9586a",
+        "keyword": "action",
+        "input": {
+          "variables": {
+            "schema": "[{\"name\":\"passd\",\"type\":\"string\",\"optional\":true,\"label\":\"passd\",\"details\":{\"real_name\":\"passd\"},\"control_type\":\"text\",\"parent\":[\"variables\",\"data\"]}]",
+            "data": {
+              "passd": "AIzaabcdefghijklmnopqrstuvwxyzABCDEFGHI"
+            }
+          }
+        },
+        "extended_output_schema": [
+          {
+            "control_type": "text",
+            "label": "passd",
+            "name": "passd",
+            "optional": true,
+            "type": "string",
+            "details": {
+              "real_name": "passd"
+            }
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "add_field_label": "Add a variable",
+            "control_type": "form-schema-builder",
+            "empty_schema_title": "Add variables by giving them a name, type and default value",
+            "exclude_fields": [
+              "hint"
+            ],
+            "item_label": "variable",
+            "label": "Variables",
+            "mark_as_required": true,
+            "name": "variables",
+            "ngIf": "!input.name",
+            "optional": true,
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Schema",
+                "extends_schema": true,
+                "broadcast_change_event": true,
+                "type": "string",
+                "name": "schema"
+              },
+              {
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "passd",
+                    "name": "passd",
+                    "type": "string",
+                    "optional": true,
+                    "details": {
+                      "real_name": "passd"
+                    },
+                    "parent": [
+                      "variables",
+                      "data"
+                    ],
+                    "hint": "Defaults to nil if not supplied.",
+                    "sticky": true
+                  }
+                ],
+                "label": "Data",
+                "type": "object",
+                "name": "data"
+              }
+            ],
+            "type": "object"
+          }
+        ],
+        "visible_config_fields": [
+          "variables.data.passd"
+        ],
+        "uuid": "a0ab2c3c-1b0d-418b-8210-12af3d4adde2"
+      },
+      {
+        "number": 5,
+        "keyword": "try",
+        "input": {
+        },
+        "block": [
+          {
+            "number": 6,
+            "provider": "google_drive",
+            "name": "search_file_or_folder",
+            "as": "6c51e055",
+            "keyword": "action",
+            "input": {
+            },
+            "uuid": "d8e09059-4f5a-4f01-b655-f3dbcf9a7dcb"
+          },
+          {
+            "number": 7,
+            "as": "a714d508",
+            "keyword": "catch",
+            "input": {
+              "max_retry_count": "0",
+              "retry_interval": "2"
+            },
+            "block": [
+
+            ],
+            "uuid": "32e76990-eabd-46d6-865c-16e0e0c4598b"
+          }
+        ],
+        "uuid": "e140f05a-ba29-4a6c-b0b2-d3bc545da50f"
+      }
+    ],
+    "uuid": "23c53666-fb94-4abd-8019-aa06f40fe131"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "clock",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "workato_files",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "google_drive",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "workato_variable",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}
